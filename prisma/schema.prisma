@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Jeune {
+  id          Int      @id @default(autoincrement())
+  prenom      String
+  programme   String
+  domaine     String
+  region      String
+  prioritaire Boolean
+  creneaux    String[]
+  interets    String[]
+  dateEntree  DateTime
+  statut      String
+  ateliers    Int      @default(0)
+  binome      Binome?
+
+  @@index([programme, region])
+}
+
+model Mentor {
+  id         Int      @id @default(autoincrement())
+  prenom     String
+  entreprise String
+  domaine    String
+  region     String
+  distanciel Boolean
+  creneaux   String[]
+  interets   String[]
+  capacite   Int
+  binomes    Binome[]
+}
+
+model Binome {
+  id       Int      @id @default(autoincrement())
+  jeune    Jeune    @relation(fields: [jeuneId], references: [id], onDelete: Cascade)
+  jeuneId  Int      @unique
+  mentor   Mentor   @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  mentorId Int
+  score    Int
+  creeLe   DateTime @default(now())
+
+  @@index([mentorId])
+}
+
+model Evenement {
+  id      Int      @id @default(autoincrement())
+  type    String
+  version Int
+  message String
+  donnees Json
+  creeLe  DateTime @default(now())
+}

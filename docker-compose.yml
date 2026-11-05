@@ -1,0 +1,10 @@
+# Postgres local pour développer avec la vraie base (identifiants de développement uniquement).
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: mentorat
+    ports:
+      - '5432:5432'

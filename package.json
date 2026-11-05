@@ -1,0 +1,42 @@
+{
+  "name": "mentorat-impact-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Démo : tableau de bord d'impact du mentorat et moteur d'appariement mentor / jeune. NestJS + Prisma + Postgres, Vue 3 + Quasar + Pinia.",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "build:server": "tsc -p server/tsconfig.json",
+    "build": "prisma generate && npm run build:server && node scripts/preparer-base.js && vite build",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push --skip-generate",
+    "db:seed": "node scripts/seed.js",
+    "test": "npm run build:server && node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.4.22",
+    "@nestjs/core": "^10.4.22",
+    "@nestjs/platform-express": "^10.4.22",
+    "@prisma/client": "^6.19.3",
+    "express": "^4.22.3",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@quasar/extras": "^2.1.0",
+    "@quasar/vite-plugin": "^2.0.2",
+    "@types/express": "^4.17.25",
+    "@types/node": "^22.20.5",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "chart.js": "^4.6.1",
+    "pinia": "^4.1.0",
+    "prisma": "^6.19.3",
+    "quasar": "^2.35.2",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.6",
+    "vue": "^3.5.45",
+    "vue-chartjs": "^5.3.4"
+  }
+}
