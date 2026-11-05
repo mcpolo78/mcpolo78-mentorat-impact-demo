@@ -30,8 +30,8 @@ const regions = computed(() => [{ label: 'Toutes les régions', value: '' }, ...
         <q-icon :name="outlinedStorage" size="14px" />
         {{ store.sante ? (store.sante.base === 'postgres' ? 'PostgreSQL' : 'Mémoire') : '…' }}
       </span>
-      <span class="pastille ok">
-        <q-icon :name="outlinedHub" size="14px" /> Bus d'événements
+      <span class="pastille ok" title="Bus d'événements versionnés">
+        <q-icon :name="outlinedHub" size="14px" /> Bus
       </span>
     </div>
   </header>
@@ -47,10 +47,14 @@ const regions = computed(() => [{ label: 'Toutes les régions', value: '' }, ...
 .titre span { font-weight: 500; color: var(--texte-2); }
 .sous-titre { font-size: 12px; color: var(--texte-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .filtres { display: flex; align-items: center; gap: 10px; }
-.bascule { border: 1px solid var(--bord); background: var(--surface); }
-.region { width: 220px; }
+.bascule { border: 1px solid var(--bord); background: var(--surface); padding: 3px; gap: 2px; border-radius: 999px; }
+.bascule :deep(.q-btn) { border-radius: 999px !important; padding: 4px 12px; min-height: 30px; font-size: 13px; transition: background-color 0.25s ease, color 0.25s ease; }
+.bascule :deep(.q-btn:not(.bg-primary):hover) { background: var(--accent-doux); }
+.bascule :deep(.q-btn:before) { box-shadow: none; }
+.region { width: 190px; }
 .region :deep(.q-field__control) { background: var(--surface); }
-.pastilles { display: flex; gap: 6px; }
+.pastilles { display: flex; gap: 6px; flex: none; }
+.pastille { white-space: nowrap; }
 .pastille { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--bord); color: var(--texte-2); background: var(--surface); }
 .pastille.ok::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #1a8f4a; }
 @media (max-width: 1100px) {
